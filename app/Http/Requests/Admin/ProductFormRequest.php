@@ -27,6 +27,7 @@ class ProductFormRequest extends FormRequest
             'price' => ['required', 'min:1'],
             'published' => ['required', 'boolean'],
             'promotion' => ['required', 'boolean'],
+            'categories' => ['required', 'exists:categories,id', 'array'],
         ];
     }
 }

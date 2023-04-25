@@ -19,6 +19,7 @@
         </div>
 
         @include('shared.input', ['type' => 'textarea', 'name' => 'description', 'value'=> $product->description ])
+        @include('shared.select', ['name' => 'categories', 'value'=> $product->categories()->pluck('id'), 'options' => $categories, 'multiple'=>true ])
 
         <div class="row justify-content-center">
             <div class="col row align-items-center">

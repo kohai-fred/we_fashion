@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductFormRequest;
+use App\Models\Category;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -29,8 +30,10 @@ class ProductController extends Controller
             'published' => false,
             'price' => 0
         ]);
+
         return view('admin.products.form', [
-            'product' => $product
+            'product' => $product,
+            'categories' => Category::pluck('name', 'id'),
         ]);
     }
 
@@ -43,6 +46,7 @@ class ProductController extends Controller
         $productData = $request->validated();
         $productData['reference'] = uniqid('wf_');
         $product = Product::create($productData);
+        $product->categories()->sync($request->validated('categories'));
 
         return to_route('admin.product.index')->with('success', 'Le produit a bien été créé.');
     }
@@ -54,6 +58,7 @@ class ProductController extends Controller
     {
         return view('admin.products.form', [
             'product' => $product,
+            'categories' => Category::pluck('name', 'id'),
         ]);
     }
 
@@ -62,6 +67,7 @@ class ProductController extends Controller
      */
     public function update(ProductFormRequest $request, Product $product)
     {
+        $product->categories()->sync($request->validated('categories'));
         $product->update($request->validated());
         return to_route('admin.product.index')->with('success', 'Le produit a bien été modifié.');
     }
