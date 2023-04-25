@@ -9,6 +9,17 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    @php
+        $route = request()->route()->getName();
+    @endphp
+
+    @include('shared.navbar')
+
+    @if (!str_contains($route, 'admin.product.index'))
+        <a href="./" class="m-3 btn btn-outline-primary btn-sm rounded-circle">
+            <i class="bi bi-arrow-return-left"></i>
+        </a>
+    @endif
 
     <div class="container mt-5" >
 
@@ -20,5 +31,6 @@
 
         @yield('content')
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
