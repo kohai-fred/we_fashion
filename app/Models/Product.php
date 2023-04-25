@@ -23,4 +23,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function sizes(): BelongsToMany
+    {
+        return $this->belongsToMany(Size::class);
+    }
 }

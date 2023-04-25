@@ -35,7 +35,10 @@
         @yield('content')
     </div>
     <script>
-        new TomSelect('select[multiple]',{plugins:{remove_button:{title: 'Supprimer'}}})
+        const selectsMultipleEl = Array.from(document.querySelectorAll('select[multiple]'))
+        selectsMultipleEl.forEach(select => {
+            new TomSelect(`#${select.id}`,{plugins:{remove_button:{title: 'Supprimer'}}})
+        });
     </script>
 </body>
 </html>

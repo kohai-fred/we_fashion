@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductFormRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Size;
 
 class ProductController extends Controller
 {
@@ -34,6 +35,7 @@ class ProductController extends Controller
         return view('admin.products.form', [
             'product' => $product,
             'categories' => Category::pluck('name', 'id'),
+            'sizes' => Size::pluck('name', 'id'),
         ]);
     }
 
@@ -42,11 +44,11 @@ class ProductController extends Controller
      */
     public function store(ProductFormRequest $request)
     {
-
         $productData = $request->validated();
         $productData['reference'] = uniqid('wf_');
         $product = Product::create($productData);
         $product->categories()->sync($request->validated('categories'));
+        $product->sizes()->sync($request->validated('sizes'));
 
         return to_route('admin.product.index')->with('success', 'Le produit a bien été créé.');
     }
@@ -59,6 +61,7 @@ class ProductController extends Controller
         return view('admin.products.form', [
             'product' => $product,
             'categories' => Category::pluck('name', 'id'),
+            'sizes' => Size::pluck('name', 'id'),
         ]);
     }
 
@@ -68,6 +71,7 @@ class ProductController extends Controller
     public function update(ProductFormRequest $request, Product $product)
     {
         $product->categories()->sync($request->validated('categories'));
+        $product->sizes()->sync($request->validated('sizes'));
         $product->update($request->validated());
         return to_route('admin.product.index')->with('success', 'Le produit a bien été modifié.');
     }
