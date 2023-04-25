@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('price', 7, 2)->nullable(false);
             $table->string('reference', 16)->nullable(false)->unique();
             $table->boolean('published')->default(false);
-            $table->enum('promotion', ['standard', 'solde'])->default('standard');
+            $table->boolean('promotion')->default(false);
             $table->timestamps();
         });
     }
