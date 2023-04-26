@@ -16,7 +16,7 @@
                 <tr>
                     <th class="d-none d-md-table-cell">Référence</th>
                     <th>Nom</th>
-                    {{-- <th>Catégorie</th> --}}
+                    <th>Image</th>
                     <th>Prix</th>
                     <th class="text-center">Promotion</th>
                     <th class="text-center">En ligne</th>
@@ -28,7 +28,7 @@
                     <tr>
                         <td class="d-none d-md-table-cell" style="font-size: 0.75rem">{{ $product->reference }}</td>
                         <td>{{ $product->title }}</td>
-                        {{-- <td>{{ $product->category }}</td> --}}
+                        <td><img width="25px" height="25px" src="{{ $product->imageUrl() }}" alt=""></td>
                         <td>{{ $product->price }}</td>
                         <td class="text-center">{{ $product->promotion ? "Oui" : "Non" }}</td>
                         <td class="text-center">
