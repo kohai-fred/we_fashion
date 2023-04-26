@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -45,11 +46,10 @@ class ProductController extends Controller
      */
     public function store(ProductFormRequest $request)
     {
-        $productData = $request->validated();
+        $productData = $this->extractData(new Product(), $request);
         $productData['reference'] = uniqid('wf_');
         $product = Product::create($productData);
-        $product->categories()->sync($request->validated('categories'));
-        $product->sizes()->sync($request->validated('sizes'));
+        $this->synchronizesWithOtherTable($product, $request);
 
         return to_route('admin.product.index')->with('success', 'Le produit a bien été créé.');
     }
@@ -71,25 +71,46 @@ class ProductController extends Controller
      */
     public function update(ProductFormRequest $request, Product $product)
     {
-        $data = $request->validated();
-        /** @var UploadedFile|null $image */
-        $image = $request->validated('image');
-        // dd($request->file('image'));
-        if ($image !== null && !$image->getError()) {
-            $data['image'] = $image->store('product', 'public');
-        }
-
-        $product->categories()->sync($request->validated('categories'));
-        $product->sizes()->sync($request->validated('sizes'));
-        $product->update($data);
+        $product->update($this->extractData($product, $request));
+        $this->synchronizesWithOtherTable($product, $request);
         return to_route('admin.product.index')->with('success', 'Le produit a bien été modifié.');
     }
 
+    private function synchronizesWithOtherTable(Product $product, ProductFormRequest $request): void
+    {
+        $product->categories()->sync($request->validated('categories'));
+        $product->sizes()->sync($request->validated('sizes'));
+    }
+
+    private function extractData(Product $product, ProductFormRequest $request): array
+    {
+        $data = $request->validated();
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image === null || $image->getError()) {
+            return $data;
+        }
+
+        // If the image exists, we delete it to replace it. This avoids ghost images
+        $this->deleteImage($product);
+
+        $data['image'] = $image->store('product', 'public');
+        return $data;
+    }
+
+    private function deleteImage(Product $product): void
+    {
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Product $product)
     {
+        // We have to delete the image in the app if we delete the product.
+        $this->deleteImage($product);
         $product->delete();
         return to_route('admin.product.index')->with('success', 'Le produit a bien été supprimé.');
     }
