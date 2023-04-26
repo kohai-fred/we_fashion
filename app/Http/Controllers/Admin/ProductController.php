@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\ProductFormRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Size;
+use Illuminate\Http\UploadedFile;
 
 class ProductController extends Controller
 {
@@ -70,6 +71,13 @@ class ProductController extends Controller
      */
     public function update(ProductFormRequest $request, Product $product)
     {
+        $data = $request->validated();
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image !== null && !$image->getError()) {
+            $data['image'] = $image->store('product', 'public');
+        }
+
         $product->categories()->sync($request->validated('categories'));
         $product->sizes()->sync($request->validated('sizes'));
         $product->update($request->validated());
