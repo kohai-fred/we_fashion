@@ -28,7 +28,16 @@ class ProductFormRequest extends FormRequest
             'published' => ['required', 'boolean'],
             'promotion' => ['required', 'boolean'],
             'categories' => ['required', 'exists:categories,id', 'array'], // todo: display error
-            'sizes' => ['array', 'exists:sizes=>id', 'required',], // todo: display error
+            'sizes' => ['array', 'exists:sizes,id', 'required',], // todo: display error
+            'image' => ['image', 'mimes:jpeg,jpg,png,webp', 'max:2000', 'required',], // todo: display error
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'image.image' => 'The type of the uploaded file should be an image. That must be jpeg,jpg,png,webp',
+            'image.max' => 'Failed to upload an image. The image maximum size is 2MB.',
         ];
     }
 }
