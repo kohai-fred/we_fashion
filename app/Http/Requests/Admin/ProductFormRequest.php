@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductFormRequest extends FormRequest
 {
@@ -21,15 +22,16 @@ class ProductFormRequest extends FormRequest
      */
     public function rules(): array
     {
+        $route = request()->route()->getName();
         return [
             'title' => ['required', 'min:5', 'max:100'],
             'description' => ['required', 'min:8'],
             'price' => ['required', 'min:1'],
             'published' => ['required', 'boolean'],
             'promotion' => ['required', 'boolean'],
-            'categories' => ['required', 'exists:categories,id', 'array'], // todo: display error
-            'sizes' => ['array', 'exists:sizes,id', 'required',], // todo: display error
-            'image' => ['image', 'mimes:jpeg,jpg,png,webp', 'max:2000', 'required',], // todo: display error
+            'categories' => ['required', 'exists:categories,id', 'array'],
+            'sizes' => ['array', 'exists:sizes,id', 'required',],
+            'image' => ['image', 'mimes:jpeg,jpg,png,webp', 'max:2000', Rule::requiredIf(str_contains($route, 'store'))],
         ];
     }
 
