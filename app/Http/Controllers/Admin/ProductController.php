@@ -74,13 +74,14 @@ class ProductController extends Controller
         $data = $request->validated();
         /** @var UploadedFile|null $image */
         $image = $request->validated('image');
+        // dd($request->file('image'));
         if ($image !== null && !$image->getError()) {
             $data['image'] = $image->store('product', 'public');
         }
 
         $product->categories()->sync($request->validated('categories'));
         $product->sizes()->sync($request->validated('sizes'));
-        $product->update($request->validated());
+        $product->update($data);
         return to_route('admin.product.index')->with('success', 'Le produit a bien été modifié.');
     }
 
