@@ -6,7 +6,9 @@
     <h1>@yield('title')</h1>
 
     <form class="vstack gap-2"
-        action="{{ route($product->exists ? 'admin.product.update' : 'admin.product.store', $product)}}" method="post">
+        action="{{ route($product->exists ? 'admin.product.update' : 'admin.product.store', $product)}}" method="post"
+        enctype="multipart/form-data"
+        >
         @csrf
         @method($product->exists ? 'put' : 'post')
 
@@ -19,8 +21,12 @@
         </div>
 
         @include('shared.input', ['type' => 'textarea', 'name' => 'description', 'value'=> $product->description ])
+
         @include('shared.select', ['name' => 'categories', 'value'=> $product->categories()->pluck('id'), 'options' => $categories, 'multiple'=>true ])
         @include('shared.select', ['name' => 'sizes','value'=> $product->sizes()->pluck('id'), 'options' => $sizes, 'multiple' => true])
+
+        @include('shared.input', ['type' => 'file', 'name' => 'image', 'value'=> $product->image ])
+
 
         <div class="row justify-content-center">
             <div class="col row align-items-center">
