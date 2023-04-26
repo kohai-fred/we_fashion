@@ -14,10 +14,9 @@
         <table class="table table-striped align-middle">
             <thead>
                 <tr>
-                    <th class="d-none d-md-table-cell">Référence</th>
                     <th>Nom</th>
-                    <th>Image</th>
                     <th>Prix</th>
+                    <th>Catégorie</th>
                     <th class="text-center">Promotion</th>
                     <th class="text-center">En ligne</th>
                     <th class="text-end">Actions</th>
@@ -26,27 +25,27 @@
             <tbody>
                 @foreach ($products as $product)
                     <tr>
-                        <td class="d-none d-md-table-cell" style="font-size: 0.75rem">{{ $product->reference }}</td>
                         <td>{{ $product->title }}</td>
-                        <td><img width="25px" height="25px" src="{{ $product->imageUrl() }}" alt=""></td>
                         <td>{{ $product->price }}</td>
-                        <td class="text-center">{{ $product->promotion ? "Oui" : "Non" }}</td>
+                        <td>
+                            @foreach ($product->categories()->pluck('name') as $key=>$categorie)
+                                {{ $categorie }}{{ $key < (count($product->categories()->pluck('name')) - 1) ? ', ': ''}}
+                            @endforeach
+                        </td>
                         <td class="text-center">
-                            @if ($product->published)
-                                <i class="bi bi-check2-all" style="color: green"></i>
-                                @else
-
-                                <i class="bi bi-check2" style="color: red"></i>
-                            @endif
+                            @include('shared.checkOrNot',['condition'=>$product->promotion])
+                        </td>
+                        <td class="text-center">
+                            @include('shared.checkOrNot',['condition'=>$product->published])
                         </td>
                         <td>
                             <div class="d-flex gap-2 w-100 justify-content-end">
-                                <a href="{{ route('admin.product.edit', $product)}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                                <form action="{{ route('admin.product.destroy', $product)}}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
-                                </form>
+                                <a href="{{ route('admin.product.edit', $product)}}" class="btn btn-secondary"><i class="bi bi-pencil-square"></i></a>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBackdrop_{{ $product->id}}" >
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                                <!-- Modal -->
+                                @include('shared.modalDeleteProduct',['product' => $product])
                             </div>
                         </td>
                     </tr>
@@ -55,6 +54,7 @@
         </table>
     </div>
 
-
+    {{-- It's for the pagination --}}
     {{ $products->links() }}
+
 @endsection
