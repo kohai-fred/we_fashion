@@ -1,0 +1,38 @@
+.custom-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    justify-content: center;
+}
+.custom-card {
+    aspect-ratio: 1/1.5;
+    transition: transform 0.3s ease-out;
+}
+.custom-card:hover {
+    transform: scale(0.99);
+    font-size: 1.1em;
+}
+
+.custom-card > a > div {
+    background: center top/ cover no-repeat;
+    transition: all 0.3s ease-in-out;
+}
+
+.custom-card-content {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    backdrop-filter: brightness(0.85);
+}
+.custom-card-content > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(25, 25, 25, 0.85), transparent);
+}
+.custom-card-content .custom-card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 8px;
+    white-space: nowrap;
+}
