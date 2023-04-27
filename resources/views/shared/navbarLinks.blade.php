@@ -6,7 +6,7 @@
 @foreach ($links as $link)
     <li class="nav-item">
         <a href="{{ route('category',['slug'=> $link->slug, 'id'=> $link->id])}}"
-            @class(['nav-link', 'active' => $route === $link->name ? true : false]) >
+            @class(['nav-link', 'active' => $route === $link->slug ]) >
             {{ucfirst($link->name)}}
         </a>
     </li>
