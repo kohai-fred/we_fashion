@@ -12,7 +12,7 @@ class HomeController extends Controller
         $products = Product::orderBy('created_at', 'desc')->paginate(6);
         return view('home', [
             'products' => $products,
-            'categories' => Category::pluck('name', 'id')
+            'categories' => Category::all()
         ]);
     }
 }

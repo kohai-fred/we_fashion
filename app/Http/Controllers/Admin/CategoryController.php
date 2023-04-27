@@ -33,10 +33,12 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryFormRequest $request)
+    public function store(CategoryFormRequest $request, Category $category)
     {
 
-        $category = Category::create($request->validated());
+        $data = $request->validated();
+        $data['slug'] = $category->getSlug();
+        $category = Category::create($data);
 
         return to_route('admin.category.index')->with('success', 'La catégorie a bien été créé.');
     }
@@ -56,7 +58,9 @@ class CategoryController extends Controller
      */
     public function update(CategoryFormRequest $request, Category $category)
     {
-        $category->update($request->validated());
+        $data = $request->validated();
+        $data['slug'] = $category->getSlug();
+        $category->update($data);
         return to_route('admin.category.index')->with('success', 'La catégorie a bien été modifié.');
     }
 

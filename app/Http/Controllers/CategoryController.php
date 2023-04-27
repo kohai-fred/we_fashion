@@ -19,7 +19,7 @@ class CategoryController extends Controller
 
         return view('category', [
             'products' => $products,
-            'categories' => Category::pluck('name', 'id')
+            'categories' => Category::all(),
         ]);
     }
 }
