@@ -4,10 +4,13 @@
     $textColor = '#66EB9A';
 @endphp
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="box-shadow: 0 3px 2px rgba(33, 33, 33, 0.752)">
     <div class="container-fluid">
         @if ($isAdminRoute)
             <p class="navbar-brand my-0" style="color: {{ $textColor }}">We Fashion</p>
+            <a href="{{ route('admin.product.index') }}" >
+                <i class="bi bi-speedometer2"></i>
+            </a>
         @else
             <a href="/" class="navbar-brand"  style="color: {{ $textColor }}">We Fashion</a>
         @endif
@@ -18,6 +21,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
             @includeWhen($isAdminRoute,'shared.navbarLinksAdmin')
+            @includeWhen(!$isAdminRoute,'shared.navbarLinks')
 
         </ul>
         @if ($isAdminRoute)

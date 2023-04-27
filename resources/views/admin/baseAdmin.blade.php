@@ -8,14 +8,9 @@
 
 @section('base-title', 'Admin')
 
-{{-- @section('style')
-    <style>
-        body{
-            background: #0E182A;
-            color: #fff;
-        }
-    </style>
-@endsection --}}
+@section('navbar')
+    @include('shared.navbar')
+@endsection
 
 @section('body')
     @php

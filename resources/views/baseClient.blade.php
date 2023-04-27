@@ -15,6 +15,10 @@
     </style>
 @endsection
 
+@section('navbar')
+    @include('shared.navbar', ['links'=>$categories])
+@endsection
+
 @section('body')
     @yield('content')
 @endsection

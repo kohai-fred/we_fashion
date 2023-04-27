@@ -13,7 +13,7 @@
 </head>
 <body >
     <header>
-        @include('shared.navbar')
+        @yield('navbar')
     </header>
     <main>
         @yield('body')
