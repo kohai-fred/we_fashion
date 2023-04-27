@@ -5,7 +5,7 @@
 
     <div class="container mt-5 my-5 d-flex align-items-start justify-content-between">
         <h1>Liste des produits</h1>
-        <p>4 résultats</p>
+        <p>{{ $products->total() }} résultat{{ $products->total()>1 ? 's' : ''}}</p>
     </div>
 
     <div class="container px-3">
