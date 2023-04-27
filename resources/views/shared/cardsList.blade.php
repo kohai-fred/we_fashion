@@ -12,7 +12,7 @@
         <div class="custom-card-container gap-3 ">
             @foreach ($products as $product)
                 <div class="custom-card">
-                    <a href="/" class="d-block h-100 shadow-lg rounded text-decoration-none">
+                    <a href="{{ route('product.show', ['slug' => $product->getSlug(), 'product' => $product->id])}}" class="d-block h-100 shadow-lg rounded text-decoration-none">
                         <div class=" text-dark h-100 rounded" style="background-image: url({{ $product->imageUrl() }})">
                             <div class="custom-card-content">
                                 <div class="p-3 pt-4 text-light">
