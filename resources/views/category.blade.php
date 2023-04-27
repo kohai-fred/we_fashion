@@ -6,10 +6,5 @@
 @section('title', 'Catégorie')
 
 @section('content')
-    <h1>Categorie {{ $categoryName }}</h1>
-    @foreach ($products as $product)
-        <div class="mb-4">
-            {{ $product->title }}
-        </div>
-    @endforeach
+    @include('shared.cardsList', ['products'=> $products, 'title' => $categoryName])
 @endsection
