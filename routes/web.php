@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\CategoryController as CategoryClientController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/category/{slug}-{id}', [CategoryClientController::class, 'index'])->where(['slug' => '[a-z0-9\-]+', 'id' => '[0-9]+'])->name('category');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('product', ProductController::class)->except(['show']);
