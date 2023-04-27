@@ -6,5 +6,5 @@
 @section('title', 'Catégorie')
 
 @section('content')
-    @include('shared.cardsList', ['products'=> $products, 'title' => $categoryName])
+    @include('shared.cardsList', ['products'=> $products, 'title' => 'Catégorie : '.$categoryName])
 @endsection
