@@ -24,7 +24,7 @@ class ProductFormRequest extends FormRequest
     {
         $route = request()->route()->getName();
         return [
-            'title' => ['required', 'min:5', 'max:100'],
+            'title' => ['required', 'min:5', 'max:100', 'lowercase'],
             'description' => ['required', 'min:8'],
             'price' => ['required', 'min:1'],
             'published' => ['required', 'boolean'],
