@@ -14,7 +14,7 @@ class CategoryController extends Controller
         $id = $request->route('id');
         $category = Category::find($id);
         $products = Product::whereHas('categories', function ($query) use ($category) {
-            $query->where('id', $category->id)->orderBy('created_at', 'desc');
+            $query->where(['id' => $category->id, 'published' => true])->orderBy('created_at', 'desc');
         })->paginate(6);
 
         return view('category', [
