@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\CategoryController as CategoryClientController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController as ProductClientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+$slugRegex = '[a-z0-9\-]+';
+$idRegex = '[0-9]+';
+
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/category/{slug}-{id}', [CategoryClientController::class, 'index'])->where(['slug' => '[a-z0-9\-]+', 'id' => '[0-9]+'])->name('category');
+Route::get('/category/{slug}-{id}', [CategoryClientController::class, 'index'])->where(['slug' => $slugRegex, 'id' => $idRegex])->name('category');
+
+Route::get('/product/{slug}-{product}', [ProductClientController::class, 'show'])->where(['slug' => $slugRegex, 'product' => $idRegex])->name('product.show');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('product', ProductController::class)->except(['show']);
