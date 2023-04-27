@@ -1,4 +1,4 @@
-@extends('base')
+@extends('baseClient')
 @section('title', 'Home')
 
 @section('content')
