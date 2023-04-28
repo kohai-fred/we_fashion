@@ -14,8 +14,8 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'homme'],
-            ['name' => 'femme'],
+            ['name' => 'homme', 'slug' => 'homme'],
+            ['name' => 'femme', 'slug' => 'femme'],
         ];
 
         foreach ($categories as $category) {
