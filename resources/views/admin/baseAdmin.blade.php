@@ -13,14 +13,6 @@
 @endsection
 
 @section('body')
-    @php
-    $route = request()->route()->getName();
-    @endphp
-    @if (!str_contains($route, 'admin.product.index'))
-        <a href="{{ route('admin.product.index') }}" class="m-3 btn btn-outline-primary btn-sm rounded-circle">
-            <i class="bi bi-arrow-return-left"></i>
-        </a>
-    @endif
 
     <div class="container mt-5" >
 
