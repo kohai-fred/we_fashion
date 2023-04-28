@@ -1,6 +1,8 @@
 @php
     $route = request()->route()->getName();
     $isAdminRoute = str_contains($route, 'admin.');
+    $isLoginRoute = str_contains($route, 'login');
+    // dd(!$isLoginRoute, $isLoginRoute);
     $textColor = '#66EB9A';
 @endphp
 
@@ -8,9 +10,6 @@
     <div class="container-fluid">
         @if ($isAdminRoute)
             <p class="navbar-brand my-0" style="color: {{ $textColor }}">We Fashion</p>
-            <a href="{{ route('admin.product.index') }}" >
-                <i class="bi bi-speedometer2"></i>
-            </a>
         @else
             <a href="/" class="navbar-brand"  style="color: {{ $textColor }}">We Fashion</a>
         @endif
@@ -21,13 +20,28 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
             @includeWhen($isAdminRoute,'shared.navbarLinksAdmin')
-            @includeWhen(!$isAdminRoute,'shared.navbarLinks')
+            @if (!$isLoginRoute)
+                @includeWhen(!$isAdminRoute,'shared.navbarLinks')
+            @endif
 
         </ul>
         @if ($isAdminRoute)
-            <a href="/" class="btn btn-light rounded-circle">
-                <i class="bi bi-soundwave"></i>
-            </a>
+            <ul class="navbar-nav gap-2">
+                <li class="navbar-item">
+                    <a href="/" class="btn btn-outline-light rounded-circle">
+                        <i class="bi bi-soundwave"></i>
+                    </a>
+                </li>
+                <li>
+                    <form action="{{ route('logout')}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-outline-danger rounded-circle">
+                            <i class="bi bi-power" ></i>
+                        </button>
+                    </form>
+                </li>
+            </ul>
         @endif
         </div>
     </div>
