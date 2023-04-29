@@ -8,6 +8,7 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/app.js",
                 "resources/css/customCard.css",
+                "resources/css/customPagination.css",
             ],
             refresh: true,
         }),

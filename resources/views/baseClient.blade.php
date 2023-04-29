@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('head')
-    @vite(['resources/css/customCard.css'])
+    @vite(['resources/css/customCard.css','resources/css/customPagination.css'])
 @endsection
 
 @section('base-title', 'WeFashion')

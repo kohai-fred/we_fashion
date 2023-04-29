@@ -29,5 +29,5 @@
     </div>
 
     {{-- It's for the pagination --}}
-    <div class="container mt-5">{{ $products->links() }}</div>
+    <div class="container mt-5 custom-pagination">{{ $products->links() }}</div>
 @endif
