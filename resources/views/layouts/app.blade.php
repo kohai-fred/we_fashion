@@ -10,19 +10,9 @@
         {{-- Tom Select - for multiselect --}}
         <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+    @vite(['resources/css/app.css'])
     @yield('head')
     <title>@yield('title') | @yield('base-title')</title>
-    <style>
-        :root{
-            --custom-primary: #66EB9A;
-            --custom-primary-dark: #359b5c;
-        }
-        body{
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-    </style>
     @yield('style')
 </head>
 <body >
