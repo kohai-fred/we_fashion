@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Size;
 
 class ProductController extends Controller
 {
@@ -16,7 +17,8 @@ class ProductController extends Controller
 
         return view('product', [
             'product' => $product,
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'sizes' => Size::pluck('name', 'id'),
         ]);
     }
 }

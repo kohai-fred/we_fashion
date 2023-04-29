@@ -18,7 +18,7 @@ class ProductFactory extends Factory
     {
         return [
             'title' => fake()->word(fake()->numberBetween(1, 3), true),
-            'description' => fake()->paragraph(fake()->numberBetween(1, 3)),
+            'description' => fake()->paragraph(fake()->numberBetween(10, 18)),
             'price' => fake()->randomFloat(2, 9, 400),
             'published' => fake()->numberBetween(0, 1),
             'promotion' => fake()->numberBetween(0, 1),

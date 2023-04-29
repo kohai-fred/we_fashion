@@ -2,16 +2,14 @@
     $route = request()->route()->getName();
     $isAdminRoute = str_contains($route, 'admin.');
     $isLoginRoute = str_contains($route, 'login');
-    // dd(!$isLoginRoute, $isLoginRoute);
-    $textColor = '#66EB9A';
 @endphp
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="box-shadow: 0 3px 2px rgba(33, 33, 33, 0.752)">
     <div class="container-fluid">
         @if ($isAdminRoute)
-            <p class="navbar-brand my-0" style="color: {{ $textColor }}">We Fashion</p>
+            <p class="navbar-brand my-0" style="color: var(--custom-primary)">We Fashion</p>
         @else
-            <a href="/" class="navbar-brand"  style="color: {{ $textColor }}">We Fashion</a>
+            <a href="/" class="navbar-brand"  style="color: var(--custom-primary)">We Fashion</a>
         @endif
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
