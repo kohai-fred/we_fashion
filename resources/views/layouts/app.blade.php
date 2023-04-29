@@ -27,7 +27,7 @@
     <main>
         @yield('body')
     </main>
-
+    @include('shared.footer')
     @yield('script')
     {{-- Tom Select - catch all multiselect --}}
     <script>
