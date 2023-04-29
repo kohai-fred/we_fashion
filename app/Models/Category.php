@@ -15,8 +15,8 @@ class Category extends Model
         'slug'
     ];
 
-    public function getSlug()
+    public function getSlug($name)
     {
-        return Str::slug($this->name);
+        return Str::slug(strtolower(Str::ascii($name)));
     }
 }

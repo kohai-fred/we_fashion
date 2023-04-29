@@ -37,7 +37,7 @@ class CategoryController extends Controller
     {
 
         $data = $request->validated();
-        $data['slug'] = $category->getSlug();
+        $data['slug'] = $category->getSlug($data['name']);
         $category = Category::create($data);
 
         return to_route('admin.category.index')->with('success', 'La catégorie a bien été créé.');
@@ -59,7 +59,7 @@ class CategoryController extends Controller
     public function update(CategoryFormRequest $request, Category $category)
     {
         $data = $request->validated();
-        $data['slug'] = $category->getSlug();
+        $data['slug'] = $category->getSlug($data['name']);
         $category->update($data);
         return to_route('admin.category.index')->with('success', 'La catégorie a bien été modifié.');
     }
