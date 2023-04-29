@@ -1,6 +1,6 @@
 @php
 $promo = 0.8;
-$newPrice = $product->price * $promo
+$newPrice = number_format($product->price * $promo, 2)
 @endphp
 
 @extends('baseClient')
