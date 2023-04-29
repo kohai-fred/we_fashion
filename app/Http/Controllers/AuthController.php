@@ -17,11 +17,9 @@ class AuthController extends Controller
 
     public function doLogin(LoginRequest $request)
     {
-        // dd($request);
         $credential = $request->validated();
         if (Auth::attempt($credential)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('admin.product.index'));
+            return redirect(route('admin.product.index'));
         }
 
         return back()->withErrors([
