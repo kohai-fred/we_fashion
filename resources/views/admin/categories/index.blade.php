@@ -25,11 +25,16 @@
                         <td>
                             <div class="d-flex gap-2 w-100 justify-content-end">
                                 <a href="{{ route('admin.category.edit', $category)}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                                <form action="{{ route('admin.category.destroy', $category)}}" method="post">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBackdrop_{{ $category->id}}" >
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                                <!-- Modal -->
+                                @include('shared.confirmDeleteModal',['id'=> $category->id,'title' => $category->name, 'route' => route('admin.category.destroy', $category)])
+                                {{-- <form action="{{ route('admin.category.destroy', $category)}}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
-                                </form>
+                                </form> --}}
                             </div>
                         </td>
                     </tr>
