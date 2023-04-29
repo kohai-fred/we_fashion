@@ -48,7 +48,12 @@ On peut choisir une ou plusieur taille à mettre au panier (fictif).
 
 Accessible via cette url : <a href="http://localohost:8000/admin">http://localohost:8000/admin</a>
 Si l'admin n'est pas encore connecté il sera redirigé sur la page de login (quelque soit la page d'administration souhaité).
-Un admin de présentation à été créé : - email : edouard@admin.com - mot de passe: admin
+
+Un admin de présentation à été créé :
+
+-   email : edouard@admin.com
+-   mot de passe: admin
+
 Une fois connecté l'administrateur est redirigé sur le dashboard.
 Dans la barre de navigation le Logo est non cliquable comme demandé dans les consignes. Un lien vers l'accueil du dashboard, un lien vers la création de produits et un autre vers le listing des catégories. 2 icones sont aussi présentes, la première pour nous ramener sur l'accueil du site et l'autre pour nous deconnecter et nous renvoyer vers la page de connexion.
 La page d'accueil du dashboard présente les 15 derniers produits créé. Chacun est éditable avec un formulaire prérempli, un bouton de suppression avec un boîte de confirmation. Un bouton nouveau permet à l'administrateur de crééer de nouveaux produits.
