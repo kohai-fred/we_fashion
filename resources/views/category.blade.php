@@ -1,10 +1,10 @@
 @php
-    $categoryName = ucfirst(request()->route('slug'));
-    $categoryName = str_replace('-',' ',$categoryName);
+    $id = request()->route('id');
+    $name = $categories->pluck('name', 'id')[$id];
 @endphp
 @extends('baseClient')
 @section('title', 'Catégorie')
 
 @section('content')
-    @include('shared.cardsList', ['products'=> $products, 'title' => 'Catégorie : '.$categoryName])
+    @include('shared.cardsList', ['products'=> $products, 'title' => 'Catégorie : '.$name])
 @endsection
