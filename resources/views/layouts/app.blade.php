@@ -17,6 +17,11 @@
             --custom-primary: #66EB9A;
             --custom-primary-dark: #359b5c;
         }
+        body{
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
     </style>
     @yield('style')
 </head>
@@ -24,7 +29,7 @@
     <header>
         @yield('navbar')
     </header>
-    <main>
+    <main class="flex-grow-1 flex-shrink-1">
         @yield('body')
     </main>
     @include('shared.footer')
