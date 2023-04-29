@@ -14,7 +14,7 @@
                 <div class="custom-card" style="position:relative">
                     @includeWhen( $product->promotion ,'shared.badgePromo',['right'=> '0.5rem', 'top'=>'0.5rem', 'style' => 'font-size: 0.75em; padding: 0.175em 0.35em'])
                     <a href="{{ route('product.show', ['slug' => $product->getSlug(), 'product' => $product->id])}}" class="d-block h-100 shadow-lg rounded text-decoration-none">
-                        <div class=" text-dark h-100 rounded" style="background-image: url({{ $product->imageUrl() }})">
+                        <div class=" text-dark h-100 rounded" style="background-image: url({{ $product->imageUrl() }})" aria-details="{{ $product->title }} est en image de fond">
                             <div class="custom-card-content">
                                 <div class="p-3 pt-4 text-light">
                                     <div class="custom-card-title">{{ $product->title }}</div>
