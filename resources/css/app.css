@@ -1,0 +1,13 @@
+:root {
+    --custom-primary: #66eb9a;
+    --custom-primary-dark: #359b5c;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a:hover {
+    color: var(--custom-primary) !important;
+}
