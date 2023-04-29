@@ -11,7 +11,8 @@
     <div class="container px-3">
         <div class="custom-card-container gap-3 ">
             @foreach ($products as $product)
-                <div class="custom-card">
+                <div class="custom-card" style="position:relative">
+                    @includeWhen( $product->promotion ,'shared.badgePromo',['right'=> '0.5rem', 'top'=>'0.5rem', 'style' => 'font-size: 0.75em; padding: 0.175em 0.35em'])
                     <a href="{{ route('product.show', ['slug' => $product->getSlug(), 'product' => $product->id])}}" class="d-block h-100 shadow-lg rounded text-decoration-none">
                         <div class=" text-dark h-100 rounded" style="background-image: url({{ $product->imageUrl() }})">
                             <div class="custom-card-content">
