@@ -14,7 +14,7 @@ $newPrice = $product->price * $promo
                 <img src="{{ $product->imageUrl()}}" alt="photo de {{ $product->title }}"
                     class="img-fluid w-100 rounded-2"
                 >
-                @include('shared.badgePromo',['right'=> '0.5rem', 'top'=>'0.5rem'])
+                @includewhen($product->promotion,'shared.badgePromo',['right'=> '0.5rem', 'top'=>'0.5rem'])
             </div>
             {{-- Info --}}
             <div class="w-100 my-5">
