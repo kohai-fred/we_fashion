@@ -9,13 +9,14 @@ use Illuminate\Database\Seeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\UploadedFile;
-
+use Faker\Factory as Faker;
 
 class ProductSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
+
     public function run(): void
     {
         $products = Product::factory(80)->create();
@@ -38,8 +39,10 @@ class ProductSeeder extends Seeder
             $category = Category::find($categories[$categoryId]);
             if ($category->name == 'homme') {
                 $imagesArray = 'images_seeder/hommes';
+                $product['title'] = $this->setProductTitle('homme');
             } else {
                 $imagesArray = 'images_seeder/femmes';
+                $product['title'] = $this->setProductTitle('femme');
             }
 
             $imageFiles = public_path($imagesArray);
@@ -50,5 +53,19 @@ class ProductSeeder extends Seeder
             $product['image'] = $image->store('product', 'public');
             $product->update($product->getAttributes());
         }
+    }
+
+    private function setProductTitle(string $gender): string
+    {
+        $faker = Faker::create();
+        if ($gender === 'homme') {
+            $title = $faker->firstNameMale();
+        } else {
+            $title = $faker->firstNameFemale();
+        }
+        if (strlen($title) < 5) {
+            $title = $title . ' ' . $faker->lastName();
+        }
+        return $title;
     }
 }
