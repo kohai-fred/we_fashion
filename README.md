@@ -1,4 +1,4 @@
-# Projet 2 : We Fashion
+# Projet 2 : <span style="color:#66EB9A ">We Fashion</span>
 
 ### PRÉSENTATION
 
