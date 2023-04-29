@@ -45,7 +45,7 @@
                                     <i class="bi bi-trash3"></i>
                                 </button>
                                 <!-- Modal -->
-                                @include('shared.modalDeleteProduct',['product' => $product])
+                                @include('shared.confirmDeleteModal',['id'=> $product->id,'title' => $product->title, 'route' => route('admin.product.destroy', $product)])
                             </div>
                         </td>
                     </tr>

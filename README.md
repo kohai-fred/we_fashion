@@ -1,66 +1,59 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Projet 2 : We Fashion
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### PRÉSENTATION
 
-## About Laravel
+Vous avez été recruté comme développeur par Edouard, directeur de We Fashion, une nouvelle boutique de e-commerce qui vend des vêtements homme et femme de créateurs. L'objectif de votre travail est de développer la plateforme We Fashion pour qu'elle devienne multicanal. Le développement est interne et utilise le framework Laravel et la base de données MySQL côté serveur.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Plus d'information <a href="./readme_project.md"><u>ici</u></a>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Prérequis
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   Avoir un mamp/xampp/wampp/lamp d'installé avec PHP v.8 minimum
+-   Composer d'installer
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Cloner le projet dans un dossier htdoc de votre server.
+2. Rentrer dans le dossier en faisant : `cd we_fashion` et ouvrer le projet dans l'éditeur.
+3. À la racine du projet créer un fichier `.env` identique au `.env.example`
+    - **Vérifier :**
+    - `APP_URL=htt://localhost:8000`
+    - `DB_DATABASE=we_fashion`
+    - D'avoir bien configurer `DB_DATABASE` `DB_USERNAME` `DB_PASSWORD` suivant votre configuration.
+4. Tapez les commandes suivantes:
+    - `npm i`
+    - `composer up`
+    - `php artisan migrate --seed` accepter le warning pour installer la base de données 'we_fashion'. La BDD devrait se remplir de produits.
+    - `php artisan storage:link` pour créer un lien accessible au navigateur des images enregistrer dans l'application.
+    - `php artisan serve` et dans un autre onglet `npm run dev`.
+    - Le site devrait être accessible à l'adresse <a href="http://localhost:8000">http://localhost:8000</a>.
+    - il est possible d'avoir un message d'erreur la première fois. L'erreur sugère de générer une `APP_KEY` qu'il faudra accépter.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## La navigation du site
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#### La page d'accueil
 
-## Laravel Sponsors
+La barre de navigation permet de se déplacer de la page d'accueil (Logo cliquable) vers les différentes catégories (dynamique - à chaque nouvelle catégorie créée par l'admin elles sont mise à jour côté client).
+Les produits sont cliquable elles aussi pour voir le descriptif détaillé.
+Si le produit est soldé, un badge (cliquable - permet d'aller à la catégorie des produits soldés) les identifie.
+La pagination permet de naviguer entre les différents produits au nombre de 6 par pages.
+Le footer présente différent liens.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+#### La page de présentation du produit
 
-### Premium Partners
+Les différentes informations sont affichées. Comme sur la page d'accueil le produit est identifié s'il est soldé (comme le prix - 20% de façon arbitraire). La/les catégories sont affichée(s) et permet de naviguer vers la catégorie associée.
+On peut choisir une ou plusieur taille à mettre au panier (fictif).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### L'administration
 
-## Contributing
+Accessible via cette url : <a href="http://localohost:8000/admin">http://localohost:8000/admin</a>
+Si l'admin n'est pas encore connecté il sera redirigé sur la page de login (quelque soit la page d'administration souhaité).
+Un admin de présentation à été créé : - email : edouard@admin.com - mot de passe: admin
+Une fois connecté l'administrateur est redirigé sur le dashboard.
+Dans la barre de navigation le Logo est non cliquable comme demandé dans les consignes. Un lien vers l'accueil du dashboard, un lien vers la création de produits et un autre vers le listing des catégories. 2 icones sont aussi présentes, la première pour nous ramener sur l'accueil du site et l'autre pour nous deconnecter et nous renvoyer vers la page de connexion.
+La page d'accueil du dashboard présente les 15 derniers produits créé. Chacun est éditable avec un formulaire prérempli, un bouton de suppression avec un boîte de confirmation. Un bouton nouveau permet à l'administrateur de crééer de nouveaux produits.
+Plusieurs règles de validation ont été mise en place lors de la création/modification d'un produit ou d'une catégorie.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Représentation graphique de la base de données
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![diagramme de la BDD](./wf_diagram_git.png)
