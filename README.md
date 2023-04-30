@@ -1,4 +1,4 @@
-# Projet 2 : <span style="color:#66EB9A ">We Fashion</span>
+# Projet 2 : <span style="color:#66EB9A">We Fashion</span>
 
 ### PRÉSENTATION
 
@@ -15,19 +15,21 @@ Plus d'information <a href="./readme_project.md"><u>ici</u></a>
 
 1. Cloner le projet dans un dossier htdoc de votre server.
 2. Rentrer dans le dossier en faisant : `cd we_fashion` et ouvrer le projet dans l'éditeur.
-3. À la racine du projet créer un fichier `.env` identique au `.env.example`
+3. À la racine du projet créer un fichier `.env` identique au `.env.example` avec la commande: `cp .env.example .env`
     - **Vérifier :**
     - `APP_URL=htt://localhost:8000`
     - `DB_DATABASE=we_fashion`
     - D'avoir bien configurer `DB_DATABASE` `DB_USERNAME` `DB_PASSWORD` suivant votre configuration.
 4. Tapez les commandes suivantes:
     - `npm i`
-    - `composer up`
-    - `php artisan migrate --seed` accepter le warning pour installer la base de données 'we_fashion'. La BDD devrait se remplir de produits.
+    - `composer install`
+    - Si une bdd `we_fashion` existe déjà :
+        - `php artisan migrate:fresh --seed`.
+        - <b>Sinon</b> `php artisan migrate --seed` accepter le warning pour installer la base de données 'we_fashion'. La BDD devrait se remplir de produits.
     - `php artisan storage:link` pour créer un lien accessible au navigateur des images enregistrer dans l'application.
+    - `php artisan key:generate`
     - `php artisan serve` et dans un autre onglet `npm run dev`.
     - Le site devrait être accessible à l'adresse <a href="http://localhost:8000">http://localhost:8000</a>.
-    - il est possible d'avoir un message d'erreur la première fois. L'erreur sugère de générer une `APP_KEY` qu'il faudra accépter.
 
 ## La navigation du site
 
@@ -62,3 +64,16 @@ Plusieurs règles de validation ont été mise en place lors de la création/mod
 ## Représentation graphique de la base de données
 
 ![diagramme de la BDD](./wf_diagram_git.png)
+
+## NOTES
+
+J'ai fais en sorte d'avoir au maximum des composants réutilisable.
+Par example :
+
+-   la barre de navigation est le même composant côté client que pour l'administration.
+-   la structure du listing des produits est identique entre l'accueil du site, les soldes et les catégories.
+-   les inputs des formulaires sont aussi des composants.
+
+Les formulaires font office de création et d'édition.
+La barre de navigation côté client se met automatiquement à jour dès qu'une nouvelle catégorie est créée par l'administrateur.
+Au moment de remplir la bdd, des catégories aléatoires sont attribuées aux produits avec des images et prénom (+ nom si le prénom est trop court) associés à la catégorie.
